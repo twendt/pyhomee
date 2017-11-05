@@ -33,7 +33,7 @@ class SubscriptionRegistry(object):
             _LOGGER.error("Received an invalid node: %r", node)
             return
 
-        _LOGGER.debug("Subscribing to events for %s", node.name)
+        _LOGGER.debug("Subscribing to events for %s", node)
         self._nodes[node.id].append(node)
         self._callbacks[node.id].append((callback))
 
