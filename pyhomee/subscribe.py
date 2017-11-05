@@ -54,8 +54,8 @@ class SubscriptionRegistry(object):
         self.join()
         _LOGGER.info("Terminated thread")
 
-    def send_node_command(self, node, attribute, target_value)
-        self.ws.send("PUT:nodes/{}/attributes/{}?target_value={}".format(node.id, attribute.id, target_value)
+    def send_node_command(self, node, attribute, target_value):
+        self.ws.send("PUT:nodes/{}/attributes/{}?target_value={}".format(node.id, attribute.id, target_value))
 
     def _run_event_loop(self):
         token = self.cube.get_token()
