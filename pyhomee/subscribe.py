@@ -57,6 +57,9 @@ class SubscriptionRegistry(object):
     def send_node_command(self, node, attribute, target_value):
         self.ws.send("PUT:nodes/{}/attributes/{}?target_value={}".format(node.id, attribute.id, target_value))
 
+    def play_homeegram(self, id):
+        self.ws.send("PUT:homeegrams/{}?play=1".format(id)
+
     def _run_event_loop(self):
         token = self.cube.get_token()
         websocket.enableTrace(True)

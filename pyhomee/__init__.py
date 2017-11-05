@@ -73,5 +73,8 @@ class HomeeCube():
     def send_node_command(self, node, attribute, target_value):
         self.registry.send_node_command(node, attribute, target_value)
 
+    def play_homeegram(self, id):
+        self.registry.play_homeegram(id)
+
     def stop(self):
         self.registry.stop()
