@@ -25,3 +25,4 @@ class Attribute():
         self.editable = attribute_dict['editable']
         self.value = attribute_dict['current_value']
         self.unit = attribute_dict['unit']
+        self.type = attribute_dict['type']
