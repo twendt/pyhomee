@@ -25,7 +25,7 @@ from pyhomee.attribute import Attribute
 class Node():
     def __init__(self, node_dict):
         self.id = node_dict["id"]
-        self.name = urllib.unquote(node_dict["name"]).decode('utf8').replace(" ", "_")
+        self.name = urllib.parse.unquote(node_dict["name"]).replace(" ", "_")
         self.profile = node_dict["profile"]
         self.state_changed = node_dict["state_changed"]
         self.added = node_dict["added"]

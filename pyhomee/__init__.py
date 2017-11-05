@@ -1,6 +1,5 @@
 import hashlib
 import websocket
-import thread
 import time
 import json
 import requests
@@ -36,7 +35,7 @@ class HomeeCube():
             "device_type": 3,
             "device_app": 1
         }
-        auth = ( self.username, hashlib.sha512(self.password).hexdigest())
+        auth = ( self.username, hashlib.sha512(self.password.encode('utf-8')).hexdigest())
         r = requests.post(url, auth=auth, data=form)
         try:
             token = r.text.split("&")[0].split("=")[1]

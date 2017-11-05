@@ -23,7 +23,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 
 def print_attribute(attribute):
-    print attribute.value
+    print(attribute.value)
 
 nodes = cube.get_nodes()
 for node in nodes:
