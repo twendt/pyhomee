@@ -70,5 +70,8 @@ class HomeeCube():
     def register(self, node, callback):
         self.registry.register(node, callback)
 
+    def send_node_command(self, node, attribute, target_value):
+        self.regitry.send_node_command(node, attribute, target_value)
+
     def stop(self):
         self.registry.stop()
