@@ -18,7 +18,6 @@ class HomeeCube():
         self.username = username
         self.password = password
         self.token = self._get_token()
-        #websocket.enableTrace(True)
         self.nodes = []
         self._get_nodes()
         self.registry = SubscriptionRegistry(self)
@@ -49,14 +48,11 @@ class HomeeCube():
     def _get_nodes(self):
         ws = websocket.create_connection("ws://{}:7681/connection?access_token={}".format(self.hostname, self.token),
                                        subprotocols = ["v2"])
-        _LOGGER.info("Sending request")
         ws.send("GET:nodes")
         nodes = ws.recv()
-        _LOGGER.info(nodes)
         ws.close()
         try:
             parsed = json.loads(nodes)
-            #print json.dumps(parsed, indent=4, sort_keys=True)
         except:
             return
         if "nodes" in parsed:

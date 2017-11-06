@@ -75,20 +75,20 @@ class SubscriptionRegistry(object):
 
     def ping(self):
         if self.connected:
-            _LOGGER.info("Sending ping")
+            _LOGGER.debug("Sending ping")
             self.connected = False
             self.send_command('ping')
             self.ping_event = self.ping_scheduler.enter(10, 1, self.ping)
             self.ping_scheduler.run(False)
         else:
-            _LOGGER.info("Ping: Calling restart")
+            _LOGGER.debug("Ping: Calling restart")
             self.restart()
 
     def send_command(self, command):
         try:
             self.ws.send(command)
         except:
-            _LOGGER.info("Restarting during send command")
+            _LOGGER.info("Sending command failed, restarting")
             self.restart()
 
     def send_node_command(self, node, attribute, target_value):
@@ -111,7 +111,7 @@ class SubscriptionRegistry(object):
     def on_message(self, ws, message):
         if message == 'pong':
             self.connected = True
-            _LOGGER.info("pong received")
+            _LOGGER.debug("pong received")
             return
         try:
             parsed = json.loads(message)
