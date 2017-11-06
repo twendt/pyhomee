@@ -54,7 +54,10 @@ class SubscriptionRegistry(object):
 
     def stop(self):
         """Tell the event loop thread to terminate."""
-        self.ws.close()
+        try:
+            self.ws.close()
+        except:
+            pass
         self.join()
         _LOGGER.info("Terminated thread")
 
