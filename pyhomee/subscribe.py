@@ -58,6 +58,10 @@ class SubscriptionRegistry(object):
             self.ws.close()
         except:
             pass
+        try:
+            self.ping_scheduler.cancel(self.ping_event)
+        except:
+            pass
         self.join()
         _LOGGER.info("Terminated thread")
 
