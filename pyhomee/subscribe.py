@@ -50,6 +50,7 @@ class SubscriptionRegistry(object):
                                              name='Homee Event Loop Thread')
         self._event_loop_thread.deamon = True
         self._event_loop_thread.start()
+        _LOGGER.info("Thread started")
 
     def stop(self):
         """Tell the event loop thread to terminate."""
@@ -67,11 +68,13 @@ class SubscriptionRegistry(object):
 
     def ping(self):
         if self.connected:
+            _LOGGER.info("Sending ping")
             self.connected = False
             self.send_command('ping')
             self.ping_event = self.ping_scheduler.enter(10, 1, self.ping)
             self.ping_scheduler.run(False)
         else:
+            _LOGGER.info("Ping: Calling restart")
             self.restart()
 
     def send_command(self, command):
@@ -100,6 +103,7 @@ class SubscriptionRegistry(object):
     def on_message(self, ws, message):
         if message == 'pong':
             self.connected = True
+            _LOGGER.info("pong received")
             return
         try:
             parsed = json.loads(message)
@@ -120,5 +124,6 @@ class SubscriptionRegistry(object):
         pass
 
     def on_open(self, ws):
+        _LOGGER.info("Websocket opened")
         self.connected = True
         self.ping()
