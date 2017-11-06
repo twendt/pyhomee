@@ -67,7 +67,7 @@ class SubscriptionRegistry(object):
 
     def ping(self):
         if self.connected:
-            seld.connected = False
+            self.connected = False
             self.send_command('ping')
             self.ping_event = self.ping_scheduler.enter(10, 1, ping)
             self.ping_scheduler.run(False)
