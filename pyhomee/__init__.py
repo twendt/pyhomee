@@ -18,7 +18,7 @@ class HomeeCube():
         self.username = username
         self.password = password
         self.token = self._get_token()
-        websocket.enableTrace(True)
+        #websocket.enableTrace(True)
         self.nodes = []
         self._get_nodes()
         self.registry = SubscriptionRegistry(self)
