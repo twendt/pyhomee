@@ -2,6 +2,7 @@
 import collections
 import json
 import logging
+import sched
 import time
 import threading
 import websocket
@@ -18,10 +19,12 @@ class SubscriptionRegistry(object):
         """Setup websocket."""
         self.cube = cube
         self.hostname = cube.hostname
+        self.connected = False
         self._nodes = collections.defaultdict(list)
         self._callbacks = collections.defaultdict(list)
         self._exiting = False
         self._event_loop_thread = None
+        ping_scheduler = sched.scheduler(time.time, time.sleep)
 
     def register(self, node, callback):
         """Register a callback.
@@ -54,11 +57,34 @@ class SubscriptionRegistry(object):
         self.join()
         _LOGGER.info("Terminated thread")
 
+    def restart(self):
+        try:
+            self.stop()
+        except:
+            pass
+        time.sleep(10)
+        self.start()
+
+    def ping(self):
+        if self.connected:
+            seld.connected = False
+            self.send_command('ping')
+            self.ping_event = self.ping_scheduler.enter(10, 1, ping)
+            self.ping_scheduler.run(False)
+        else:
+            self.restart()
+
+    def send_command(self, command):
+        try:
+            self.ws.send(command)
+        except:
+            self.restart()
+
     def send_node_command(self, node, attribute, target_value):
-        self.ws.send("PUT:nodes/{}/attributes/{}?target_value={}".format(node.id, attribute.id, target_value))
+        self.send_command("PUT:nodes/{}/attributes/{}?target_value={}".format(node.id, attribute.id, target_value))
 
     def play_homeegram(self, id):
-        self.ws.send("PUT:homeegrams/{}?play=1".format(id))
+        self.send_command("PUT:homeegrams/{}?play=1".format(id))
 
     def _run_event_loop(self):
         token = self.cube.get_token()
@@ -72,6 +98,9 @@ class SubscriptionRegistry(object):
         self.ws.run_forever()
 
     def on_message(self, ws, message):
+        if message == 'pong':
+            self.connected = True
+            return
         try:
             parsed = json.loads(message)
         except:
@@ -85,10 +114,11 @@ class SubscriptionRegistry(object):
             pass
 
     def on_error(self, ws, error):
-        pass
+        self.restart()
 
     def on_close(self, ws):
         pass
 
     def on_open(self, ws):
-        ws.send('ping')
+        self.connected = True
+        self.ping()
