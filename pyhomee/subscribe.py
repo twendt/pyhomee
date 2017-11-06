@@ -99,7 +99,7 @@ class SubscriptionRegistry(object):
 
     def _run_event_loop(self):
         token = self.cube.get_token()
-        websocket.enableTrace(True)
+        #websocket.enableTrace(True)
         self.ws = websocket.WebSocketApp("ws://{}:7681/connection?access_token={}".format(self.hostname, token),
                                   subprotocols = ["v2"],
                                   on_message = self.on_message,
