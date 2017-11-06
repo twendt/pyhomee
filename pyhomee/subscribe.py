@@ -24,7 +24,7 @@ class SubscriptionRegistry(object):
         self._callbacks = collections.defaultdict(list)
         self._exiting = False
         self._event_loop_thread = None
-        ping_scheduler = sched.scheduler(time.time, time.sleep)
+        self.ping_scheduler = sched.scheduler(time.time, time.sleep)
 
     def register(self, node, callback):
         """Register a callback.
