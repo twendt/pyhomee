@@ -84,6 +84,7 @@ class SubscriptionRegistry(object):
         try:
             self.ws.send(command)
         except:
+            _LOGGER.info("Restarting during send command")
             self.restart()
 
     def send_node_command(self, node, attribute, target_value):
