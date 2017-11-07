@@ -6,7 +6,7 @@ import requests
 import urllib
 import logging
 from pyhomee.util import get_token
-from pyhomee.models import Node
+from pyhomee.models import Node, Group, Homeegram, Relationship
 from pyhomee.subscribe import SubscriptionRegistry
 
 _LOGGER = logging.getLogger(__name__)

@@ -7,7 +7,7 @@ import time
 import threading
 import websocket
 from pyhomee.util import get_token
-from pyhomee.attribute import Attribute
+from pyhomee.models import Attribute
 
 _LOGGER = logging.getLogger(__name__)
 
