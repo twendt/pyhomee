@@ -25,17 +25,17 @@ class Attribute():
 
 class Group():
     def __init__(self, group_dict):
-        self.id = gropu_dict['id']
-        self.category = gropu_dict['category']
-        self.name = gropu_dict['name']
-        self.image = gropu_dict['image']
-        self.note = gropu_dict['note']
-        self.owner = gropu_dict['owner']
-        self.state = gropu_dict['state']
-        self.phonetic_name = gropu_dict['phonetic_name']
-        self.services = gropu_dict['services']
-        self.order = gropu_dict['order']
-        self.added = gropu_dict['added']
+        self.id = group_dict['id']
+        self.category = group_dict['category']
+        self.name = group_dict['name']
+        self.image = group_dict['image']
+        self.note = group_dict['note']
+        self.owner = group_dict['owner']
+        self.state = group_dict['state']
+        self.phonetic_name = group_dict['phonetic_name']
+        self.services = group_dict['services']
+        self.order = group_dict['order']
+        self.added = group_dict['added']
 
 class Relationship():
     def __init__(self, relationship_dict):
