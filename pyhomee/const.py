@@ -1,9 +1,10 @@
 SWITCH = 1
 BRIGHTNESS = 2
-SATURATION = 206
-BATTERY = 8
-ENERGY = 4
 POWER = 3
+ENERGY = 4
+BATTERY = 8
+COVER_POSITION = 15
+SATURATION = 206
 
 ATTR_TYPES = {
   SWITCH: "switch",
@@ -11,5 +12,6 @@ ATTR_TYPES = {
   SATURATION: "saturation",
   BATTERY: "battery",
   ENERGY: "energy",
-  POWER: "power"
+  POWER: "power",
+  COVER_POSITION: "cover_position"
 }
