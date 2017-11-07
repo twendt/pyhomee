@@ -66,7 +66,7 @@ class HomeeCube():
 
     def _get_nodes(self):
         if "nodes" in self.all_config:
-            for node in parsed["nodes"]:
+            for node in self.all_config["nodes"]:
                 self.nodes.append(Node(node))
         return
 
