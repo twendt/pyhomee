@@ -59,6 +59,10 @@ class HomeeCube():
         except:
             return
         self.all_config = parsed["all"]
+        _get_nodes()
+        _get_groups()
+        _get_relationships()
+        _get_homeegrams()
 
     def _get_nodes(self):
         if "nodes" in self.all_config:
