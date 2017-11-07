@@ -110,7 +110,7 @@ class HomeeCube():
         nodes = []
         for rel in self.relationships:
             if rel.group_id == group_id and rel.node_id != 0:
-                node.append(rel.node_id)
+                nodes.append(rel.node_id)
         return nodes
 
     def register(self, node, callback):
